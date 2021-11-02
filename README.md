@@ -7,6 +7,9 @@
 - 실행 후 http://localhost:8080/로 접속하면 톰캣 화면이 뜸
 ## 5. 웹문서 추가해보기
 - C:\Users\auswo\eclipse\apache-tomcat-9.0.54\webapps\ROOT에 hello.txt 추가
+- http://localhost:8080/와 http://localhost:8080/index.jsp는 같음(index.jsp = 기본 디렉토리)
+- http://localhost:8080/hello.txt에 접속하면 hello.txt가 뜸
 
 # Reference
 - https://www.youtube.com/watch?v=qfGbsEdMaV4&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=5
+- https://www.notion.so/JSP-09499dda8867425696c660d7d65454a2
