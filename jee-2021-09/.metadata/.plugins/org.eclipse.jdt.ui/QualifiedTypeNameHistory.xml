@@ -5,4 +5,7 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.buf.StringUtils"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.codec.binary.StringUtils"/>
+    <fullyQualifiedTypeName name="org.apache.commons.codec.binary.StringUtils"/>
 </qualifiedTypeNameHistroy>
