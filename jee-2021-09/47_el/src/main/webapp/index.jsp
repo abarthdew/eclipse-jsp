@@ -8,8 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%=request.getAttribute("result")%> 입니다<br>
+	${result} 입니다<br>
+	${names[2]}<br>
+	${notice.title}
 </body>
 </html>
 
-<!--  http://localhost:8080/mvc2?num=3 -->
+<!--  http://localhost:8080/el -->
