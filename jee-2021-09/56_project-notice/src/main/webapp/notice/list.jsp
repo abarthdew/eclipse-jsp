@@ -1,20 +1,9 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="com.newlecture.web.entity.Notice"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%
-	String url = "jdbc:oracle:thin:@localhost:1521/xe";
-	String sql = "SELECT * FROM NOTICE";
-	
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	Connection con = DriverManager.getConnection(url, "newlec", "1234");
-	Statement st = con.createStatement();
-	ResultSet rs = st.executeQuery(sql);
-%>
 <head>
     <title>코딩 전문가를 만들기 위한 온라인 강의 시스템</title>
     <meta charset="UTF-8">
@@ -184,19 +173,22 @@
 						</tr>
 					</thead>
 					<tbody>
-					<% out.print("test"); %>
-					<% while(rs.next()) { %>	
+					<%
+						List<Notice> list = (List<Notice>)request.getAttribute("list");
+						for (Notice n : list) {
+							pageContext.setAttribute("n", n); // 꺼내온 list를 page 저장소에 담음
+					%>
 					<tr>
-						<td><%= rs.getInt("ID") %></td>
-						<td class="title indent text-align-left"><a href="detail?id=<%=rs.getInt("ID")%>"><%= rs.getString("TITLE") %></a></td>
-						<td><%= rs.getString("WRITE_ID") %></td>
-						<td>
-							<%= rs.getString("REGDATE") %>		
-						</td>
-						<td><%= rs.getInt("HIT") %></td>
+						<td>${n.id }</td>
+						<td class="title indent text-align-left"><a href="detail?id=${n.id }">${n.title }</a></td>
+						<!--el 키워드는 저장소에 n이라는 값이 있어야 하고, 거기서 값을 꺼내오는 것 : 여기서 임시저장소로 적합한 게 page저장소 -->
+						<td>${n.writer }</td>
+						<td>${n.regdate }</td>
+						<td>${n.hit }</td>
 					</tr>
-					<% }%>					
-					
+					<%
+						}
+					%>
 					</tbody>
 				</table>
 			</div>
@@ -267,9 +259,4 @@
             </div>
         </footer>
     </body>
-    <%
-    	rs.close();
-        st.close();
-        con.close();
-    %>
     </html>
