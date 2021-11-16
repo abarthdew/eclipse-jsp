@@ -175,6 +175,7 @@
 					</thead>
 					<tbody>
 						<!-- n이라는 키워드로 list안의 값을 사용할 수 있게 됨 -->
+						<!-- 저장소에서 값을 꺼내는 것은 el이, 그 값을 이용할 수 있게 page 저장소에 담아주는 작업을 var="n" -->
 						<c:forEach var="n" items="${list}">
 							<tr>
 								<td>${n.id }</td>
