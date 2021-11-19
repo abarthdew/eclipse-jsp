@@ -210,7 +210,6 @@
 	
 	<ul class="-list- center">
 	<c:forEach var="i" begin="0" end="4">
-		<!-- <li><a class="-text- orange bold" href="?p=${i+1 }&t=&q=" >${i+1 }</a></li> -->
 		<li><a class="-text- orange bold" href="?p=${startNum+i }&t=&q=" >${startNum+i }</a></li>
 	</c:forEach>
 	</ul>
