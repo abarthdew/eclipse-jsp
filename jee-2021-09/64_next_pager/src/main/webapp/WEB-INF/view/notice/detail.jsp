@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,7 +163,12 @@
 								</tr>
 								<tr>
 									<th>첨부파일</th>
-									<td colspan="3">${ notice.files }</td>
+									<td colspan="3">
+										<c:forTokens var="fileName" items="${notice.files }" delims="," varStatus="st">
+											<a href="${fileName }">${fileName }</a>
+											<c:if test="${!st.last }">/</c:if> <!-- 마지막 인자는 / 빼기 -->
+										</c:forTokens>
+									</td>
 								</tr>
 								<tr class="content">
 									<td colspan="4"><div><br></div><div>${ notice.content }</div><div><br></div><div><a href="http://www.newlecture.com/resource/spring2.zip"><b><u><font size="5" color="#dd8a00">예제 다운로드하기</font></u></b></a></div><div><br></div><div><br></div></td>
@@ -172,7 +178,8 @@
 					</div>
 					
 					<div class="margin-top text-align-center">
-						<a class="btn btn-list" href="list.jsp">목록</a>
+						<a class="btn btn-list" href="/notice/list">목록</a>
+						<a class="btn btn-list" href="list">목록2</a>
 					</div>
 					
 					<div class="margin-top">
