@@ -163,7 +163,12 @@
 									<th>작성자</th>
 									<td>${ notice.writer }</td>
 									<th>조회수</th>
-									<td>${ notice.hit }</td>
+									<td>
+										<!-- 기본값 -->
+										<fmt:formatNumber value="${ notice.hit }" /><br/>
+										<!-- 패턴 -->
+										<fmt:formatNumber type="number" pattern="##,####$" value="${ notice.hit }" />
+									</td>
 								</tr>
 								<tr>
 									<th>첨부파일</th>

@@ -181,7 +181,9 @@
 								<td>${n.id }</td>
 								<td class="title indent text-align-left"><a href="detail?id=${n.id }">${n.title }</a></td>
 								<td>${n.writer }</td>
-								<td><fmt:formatDate pattern="YYYY-MM-DD hh:mm:ss" value="${n.regdate }"></fmt:formatDate></td>
+								<td>
+									<fmt:formatDate pattern="YYYY-MM-DD hh:mm:ss" value="${n.regdate }"></fmt:formatDate>
+								</td>
 								<td>${n.hit }</td>
 							</tr>
     					</c:forEach>
