@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 날짜 관련 태그 추가 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,7 +155,9 @@
 								</tr>
 								<tr>
 									<th>작성일</th>
-									<td class="text-align-left text-indent" colspan="3">${ notice.regdate }</td>
+									<td class="text-align-left text-indent" colspan="3">
+										<fmt:formatDate pattern="YYYY-MM-DD hh:mm:ss" value="${ notice.regdate }"></fmt:formatDate>
+									</td>
 								</tr>
 								<tr>
 									<th>작성자</th>
