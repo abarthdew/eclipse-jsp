@@ -195,7 +195,7 @@
 									<th>첨부파일3</th>
 									<td colspan="3">
 										<c:forTokens var="fileName" items="${notice.files }" delims="," varStatus="st">
-											<!-- style 설정 -->
+											<!-- zip인 경우만 style 설정 -->
 											<c:set var="style" value=""/>
 											<c:if test="${fn:endsWith(fileName, '.zip') }">
 												<c:set var="style" value="font-weight:bold; color:red;"/>
