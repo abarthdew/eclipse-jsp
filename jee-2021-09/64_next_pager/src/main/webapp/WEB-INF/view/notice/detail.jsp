@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 날짜 관련 태그 추가 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!-- function 태그 추가 : el안쪽에서 함수를 호출하는 패키지 형태로 사용 -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,6 +178,31 @@
 										<c:forTokens var="fileName" items="${notice.files }" delims="," varStatus="st">
 											<a href="${fileName }">${fileName }</a>
 											<c:if test="${!st.last }">/</c:if> <!-- 마지막 인자는 / 빼기 -->
+										</c:forTokens>
+									</td>
+								</tr>
+								<tr>
+									<th>첨부파일2</th>
+									<td colspan="3">
+										<c:forTokens var="fileName" items="${notice.files }" delims="," varStatus="st">
+											<!-- 대문자로 출력 -->
+											<a href="${fileName }">${fn:toUpperCase(fileName) }</a>
+											<c:if test="${!st.last }">/</c:if>
+										</c:forTokens>
+									</td>
+								</tr>
+								<tr>
+									<th>첨부파일3</th>
+									<td colspan="3">
+										<c:forTokens var="fileName" items="${notice.files }" delims="," varStatus="st">
+											<!-- style 설정 -->
+											<c:set var="style" value=""/>
+											<c:if test="${fn:endsWith(fileName, '.zip') }">
+												<c:set var="style" value="font-weight:bold; color:red;"/>
+											</c:if>
+											<!-- style 적용 -->
+											<a href="${fileName }" style="${style}">${fileName }</a>
+											<c:if test="${!st.last }">/</c:if>
 										</c:forTokens>
 									</td>
 								</tr>
