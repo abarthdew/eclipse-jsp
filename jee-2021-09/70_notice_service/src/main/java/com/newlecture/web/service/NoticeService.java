@@ -16,11 +16,16 @@ public class NoticeService {
 	}
 	
 	public List<Notice> getNoticeList(String field, String query, int page) { //3
+		String sql = "SELECT * FROM"
+				+ "      (SELECT ROWNUM NUM, N.* FROM"
+				+ "            (SELECT * FROM NOTICE ORDER BY REGDATE DESC) N"
+				+ "       )"
+				+ "    WHERE ROWNUM BETWEEN 1 AND 3";
 		return null;
 	}
 	
 	public int getNoticeCount() {
-		return 0;
+		return getNoticeCount("title", "");
 	}
 	
 	public int getNoticeCount(String field, String query) {
