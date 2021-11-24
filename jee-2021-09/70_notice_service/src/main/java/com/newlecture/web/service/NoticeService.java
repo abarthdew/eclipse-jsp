@@ -1,5 +1,12 @@
 package com.newlecture.web.service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.newlecture.web.entity.Notice;
@@ -15,13 +22,57 @@ public class NoticeService {
 		return getNoticeList("title", "", 1); 
 	}
 	
+	/**
+	 * @param field : TITLE, WRITE_ID
+	 * @param query : 검색어
+	 * @param page : 페이지 번호
+	 * @return
+	 */
 	public List<Notice> getNoticeList(String field, String query, int page) { //3
+		List<Notice> list = new ArrayList();
 		String sql = "SELECT * FROM"
 				+ "      (SELECT ROWNUM NUM, N.* FROM"
-				+ "            (SELECT * FROM NOTICE ORDER BY REGDATE DESC) N"
+				+ "            (SELECT * FROM NOTICE where title like ? ORDER BY REGDATE DESC) N"
 				+ "       )"
-				+ "    WHERE ROWNUM BETWEEN 1 AND 3";
-		return null;
+				+ "    WHERE ROWNUM BETWEEN ? AND ?";
+		// 1, 11, 21, 31 -> 1 + (page - 1) * 10
+		// 10, 20, 30, 40 -> page * 10
+		
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			PreparedStatement st = con.prepareStatement(sql); 
+			st.setString(1, "%" + query + "%");
+			st.setInt(2, 1 + (page - 1) * 10);
+			st.setInt(3, page * 10);
+			// st.setString(0, "title" || "write_id");
+			// title 혹은 write_id 컬럼을 ?로 처리할 경우 ''가 생기기 때문에 불가능
+			// SELECT * FROM NOTICE where 'title' = ?
+			
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Notice notice = new Notice(
+					rs.getInt("ID"),
+					rs.getString("TITLE"),
+					rs.getString("WRITE_ID"),
+					rs.getInt("HIT"),
+					rs.getDate("REGDATE"),
+					rs.getString("FILES"),
+					rs.getString("CONTENT")
+				);
+				list.add(notice);
+			}
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	public int getNoticeCount() {
