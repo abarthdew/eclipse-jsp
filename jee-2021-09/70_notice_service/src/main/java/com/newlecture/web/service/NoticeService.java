@@ -80,27 +80,148 @@ public class NoticeService {
 	}
 	
 	public int getNoticeCount(String field, String query) {
-		return 0;
+		int count = 0;
+		String sql = "SELECT count(ID) COUNT FROM"
+				+ "      (SELECT ROWNUM NUM, N.* FROM"
+				+ "            (SELECT * FROM NOTICE where title like ? ORDER BY REGDATE DESC) N"
+				+ "       )";
+
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			PreparedStatement st = con.prepareStatement(sql); 
+			st.setString(1, "%" + query + "%");
+			
+			ResultSet rs = st.executeQuery();
+			count = rs.getInt("count");
+			
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 	public Notice getNotice(int id) {
+		Notice notice = null;
+		
 		String sql = "SELECT * FROM NOTICE WHERE ID = ?";
-		return null;
+		
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			PreparedStatement st = con.prepareStatement(sql); 
+			st.setInt(1, id);
+			
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				notice = new Notice(
+					rs.getInt("ID"),
+					rs.getString("TITLE"),
+					rs.getString("WRITE_ID"),
+					rs.getInt("HIT"),
+					rs.getDate("REGDATE"),
+					rs.getString("FILES"),
+					rs.getString("CONTENT")
+				);
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return notice;
 	}
 	
 	public Notice getNextNotice(int id) {
+		Notice notice = null;
+		
 		String sql = "SELECT * FROM NOTICE"
 				+ "    WHERE ID = (SELECT ID FROM NOTICE WHERE REGDATE > ("
-				+ "            SELECT REGDATE FROM NOTICE WHERE ID = 3)"
+				+ "            SELECT REGDATE FROM NOTICE WHERE ID = ?)"
 				+ "            AND ROWNUM = 1"
 				+ "    )";
-		return null;
+		
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			PreparedStatement st = con.prepareStatement(sql); 
+			st.setInt(1, id);
+			
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				notice = new Notice(
+					rs.getInt("ID"),
+					rs.getString("TITLE"),
+					rs.getString("WRITE_ID"),
+					rs.getInt("HIT"),
+					rs.getDate("REGDATE"),
+					rs.getString("FILES"),
+					rs.getString("CONTENT")
+				);
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return notice;
 	}
 	
 	public Notice getPrevNotice(int id) {
+		Notice notice = null;
+		
 		String sql = "SELECT * FROM (SELECT * FROM NOTICE ORDER BY REGDATE DESC)"
-				+ "    WHERE REGDATE < (SELECT REGDATE FROM NOTICE WHERE ID = 3) AND ROWNUM = 1";
-		return null;
+				+ "    WHERE REGDATE < (SELECT REGDATE FROM NOTICE WHERE ID = ?) AND ROWNUM = 1";
+		
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			PreparedStatement st = con.prepareStatement(sql); 
+			st.setInt(1, id);
+			
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				notice = new Notice(
+					rs.getInt("ID"),
+					rs.getString("TITLE"),
+					rs.getString("WRITE_ID"),
+					rs.getInt("HIT"),
+					rs.getDate("REGDATE"),
+					rs.getString("FILES"),
+					rs.getString("CONTENT")
+				);
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return notice;
 	}
 	
 }
