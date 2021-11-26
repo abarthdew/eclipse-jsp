@@ -32,7 +32,7 @@ public class NoticeService {
 		List<Notice> list = new ArrayList();
 		String sql = "SELECT * FROM"
 				+ "      (SELECT ROWNUM NUM, N.* FROM"
-				+ "            (SELECT * FROM NOTICE where title like ? ORDER BY REGDATE DESC) N"
+				+ "            (SELECT * FROM NOTICE where " + field + " like ? ORDER BY REGDATE DESC) N"
 				+ "       )"
 				+ "    WHERE ROWNUM BETWEEN ? AND ?";
 		// 1, 11, 21, 31 -> 1 + (page - 1) * 10
