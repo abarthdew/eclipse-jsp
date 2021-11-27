@@ -34,7 +34,7 @@ public class NoticeService {
 				+ "      (SELECT ROWNUM NUM, N.* FROM"
 				+ "            (SELECT * FROM NOTICE where " + field + " like ? ORDER BY REGDATE DESC) N"
 				+ "       )"
-				+ "    WHERE ROWNUM BETWEEN ? AND ?";
+				+ "    WHERE NUM BETWEEN ? AND ?";
 		// 1, 11, 21, 31 -> 1 + (page - 1) * 10
 		// 10, 20, 30, 40 -> page * 10
 		
