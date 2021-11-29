@@ -35,7 +35,11 @@ public class NoticeListController extends HttpServlet{
 		NoticeService service = new NoticeService();
 		List<Notice> list = service.getNoticeList(field, query, page);
 		
+		// 검색된 글의 카운트
+		int count = service.getNoticeCount(field, query);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("count", count);
 		
 		request.getRequestDispatcher("/WEB-INF/view/notice/list.jsp").forward(request, response);
 	}
