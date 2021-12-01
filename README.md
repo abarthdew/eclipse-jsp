@@ -6,26 +6,28 @@
 CREATE USER NEWLEC IDENTIFIED BY 1234;
 GRANT CONNECT, RESOURCE, DBA TO NEWLEC;
 
-create table notice (
-    id number,
-    title varchar(100),
-    write_id varchar(50),
-    content varchar(4000),
-    regdate date,
-    hit number,
-    files varchar(4000)
+CREATE TABLE NOTICE (
+    ID NUMBER,
+    TITLE VARCHAR(100),
+    WRITE_ID VARCHAR(50),
+    CONTENT VARCHAR(4000),
+    REGDATE DATE,
+    HIT NUMBER,
+    FILES VARCHAR(4000)
 );
 INSERT INTO NOTICE VALUES (6, 'TITLE', 'WRITE_ID', 'CONTENT', SYSDATE, 6, 'FILES');
 SELECT * FROM NOTICE;
 ```
 ```sql
-create table comment2 (
+CREATE TABLE COMMENT2 (
     ID NUMBER,
     CONTENT VARCHAR(4000),
     REGDATE DATE,
     WRITE_ID VARCHAR(50),
     NOTICE_ID NUMBER
 );
+INSERT INTO COMMENT2 VALUES (1, '내용1', SYSDATE, '사용자1', 1);
+SELECT * FROM COMMENT2;
 
 ```
 
