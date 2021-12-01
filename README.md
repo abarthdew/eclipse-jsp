@@ -2,7 +2,7 @@
 ## <2020 Servlet&JSP 프로그래밍>
 
 ## 데이터베이스 정보
-- 
+- 50_project
 ```sql
 CREATE USER NEWLEC IDENTIFIED BY 1234;
 GRANT CONNECT, RESOURCE, DBA TO NEWLEC;
