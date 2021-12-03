@@ -155,55 +155,58 @@
 						</fieldset>
 					</form>
 				</div>
-
-				<div class="notice margin-top">
-					<h3 class="hidden">공지사항 목록</h3>
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="w60">번호</th>
-								<th class="expand">제목</th>
-								<th class="w100">작성자</th>
-								<th class="w100">작성일</th>
-								<th class="w60">조회수</th>
-								<th class="w40">공개</th>
-								<th class="w40">삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- tr 반복문 수정 -->
-							<c:forEach var="n" items="${list}">
+				
+				<form action="list" method="post">
+					<div class="notice margin-top">
+						<h3 class="hidden">공지사항 목록</h3>
+						<table class="table">
+							<thead>
 								<tr>
-									<td>${n.id }</td>
-									<td class="title indent text-align-left"><a href="detail?id=${n.id }">${n.title }</a><span> [${n.cnt }]</span></td>
-									<td>${n.writer }</td>
-									<td>
-										<fmt:formatDate pattern="YYYY-MM-DD hh:mm:ss" value="${n.regdate }"></fmt:formatDate>
-									</td>
-									<td>${n.hit }</td>
-									<td><input type="checkbox" name="open"></td>
-									<td><input type="checkbox" name="del"></td>
+									<th class="w60">번호</th>
+									<th class="expand">제목</th>
+									<th class="w100">작성자</th>
+									<th class="w100">작성일</th>
+									<th class="w60">조회수</th>
+									<th class="w40">공개</th>
+									<th class="w40">삭제</th>
 								</tr>
-	    					</c:forEach>
-						</tbody>
-					</table>
-				</div>
-
-				<!-- 현재 페이지 -->
-				<c:set var="page" value="${(empty param.p) ? 1 : param.p }" /> 
-				<c:set var="startNum" value="${page-(page-1)%5 }" />
-				<c:set var="lastNum" value="${fn:substringBefore(Math.ceil(count/10), '.') }" />
-		
-				<div class="indexer margin-top align-right">
-					<h3 class="hidden">현재 페이지</h3>
-					<div><span class="text-orange text-strong">${(empty param.p) ? 1 : param.p}</span> / ${lastNum } pages</div>
-				</div>
-
-				<div class="text-align-right margin-top">
-					<input type="submit" class="btn-text btn-default" value="일괄공개">
-					<input type="submit" class="btn-text btn-default" value="일괄삭제">
-					<a class="btn-text btn-default" href="reg.html">글쓰기</a>				
-				</div>
+							</thead>
+							<tbody>
+								<!-- tr 반복문 수정 -->
+								<c:forEach var="n" items="${list}">
+									<tr>
+										<td>${n.id }</td>
+										<td class="title indent text-align-left"><a href="detail?id=${n.id }">${n.title }</a><span> [${n.cnt }]</span></td>
+										<td>${n.writer }</td>
+										<td>
+											<fmt:formatDate pattern="YYYY-MM-DD hh:mm:ss" value="${n.regdate }"></fmt:formatDate>
+										</td>
+										<td>${n.hit }</td>
+										<!-- 공개, 삭제하기 위해 아이디 값을 넘김 -->
+										<td><input type="checkbox" name="open-id" value="${n.id }"></td>
+										<td><input type="checkbox" name="del-id" value="${n.id }"></td>
+									</tr>
+		    					</c:forEach>
+							</tbody>
+						</table>
+					</div>
+	
+					<!-- 현재 페이지 -->
+					<c:set var="page" value="${(empty param.p) ? 1 : param.p }" /> 
+					<c:set var="startNum" value="${page-(page-1)%5 }" />
+					<c:set var="lastNum" value="${fn:substringBefore(Math.ceil(count/10), '.') }" />
+			
+					<div class="indexer margin-top align-right">
+						<h3 class="hidden">현재 페이지</h3>
+						<div><span class="text-orange text-strong">${(empty param.p) ? 1 : param.p}</span> / ${lastNum } pages</div>
+					</div>
+	
+					<div class="text-align-right margin-top">
+						<input type="submit" class="btn-text btn-default" value="일괄공개">
+						<input type="submit" class="btn-text btn-default" value="일괄삭제">
+						<a class="btn-text btn-default" href="reg.html">글쓰기</a>				
+					</div>
+				</form>
 
 				<!-- 페이징 -->
 				<div class="margin-top align-center pager">	
