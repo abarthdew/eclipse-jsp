@@ -32,7 +32,8 @@ INSERT INTO COMMENT2 VALUES (1, '내용1', SYSDATE, '사용자1', 1);
 SELECT * FROM COMMENT2;
 
 ```
-- notice 테이블에 대한 컬럼 추가(글 공개 여부)
+- 86_admin : notice 테이블에 대한 컬럼 추가(글 공개 여부)
+![ex_screen] (notice-pub.PNG)
 
 # Reference
 - https://www.youtube.com/watch?v=qfGbsEdMaV4&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=5
