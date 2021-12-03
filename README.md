@@ -33,6 +33,7 @@ SELECT * FROM COMMENT2;
 
 ```
 - 86_admin : notice 테이블에 대한 컬럼 추가(글 공개 여부)
+
 ![ex_screenshot](images/notice-pub.PNG)
 
 # Reference
