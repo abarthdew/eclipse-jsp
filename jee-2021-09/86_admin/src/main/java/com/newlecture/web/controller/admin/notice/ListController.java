@@ -23,8 +23,18 @@ public class ListController extends HttpServlet{
 		String[] openIds = request.getParameterValues("open-id"); // 여러 개 값이므로 배열로 받음
 		String[] delIds = request.getParameterValues("del-id");
 		
-		for(String openId : openIds) System.out.printf("open ID : %s\n", openId);
-		for(String delId : delIds) System.out.printf("del ID : %s\n", delId);
+//		for(String openId : openIds) System.out.printf("open ID : %s\n", openId);
+//		for(String delId : delIds) System.out.printf("del ID : %s\n", delId);
+		
+		String cmd = request.getParameter("cmd");
+		switch(cmd) {
+		case "all-open": 
+			for(String openId : openIds) System.out.printf("open ID : %s\n", openId);
+			break;
+		case "all-del":
+			for(String delId : delIds) System.out.printf("del ID : %s\n", delId);
+			break;
+		}
 	}
 	
 	@Override

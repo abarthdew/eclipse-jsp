@@ -202,8 +202,9 @@
 					</div>
 	
 					<div class="text-align-right margin-top">
-						<input type="submit" class="btn-text btn-default" value="일괄공개">
-						<input type="submit" class="btn-text btn-default" value="일괄삭제">
+						<!-- cmd라는 키 값으로 오되, 그 안에서 value로 나누어짐 -->
+						<input type="submit" class="btn-text btn-default" name="cmd" value="all-open">
+						<input type="submit" class="btn-text btn-default" name="cmd" value="all-del">
 						<a class="btn-text btn-default" href="reg.html">글쓰기</a>				
 					</div>
 				</form>
