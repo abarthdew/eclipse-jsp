@@ -13,13 +13,42 @@ import com.newlecture.web.entity.Notice;
 import com.newlecture.web.entity.NoticeView;
 
 public class NoticeService {
-
-	public List<NoticeView> getNoticeList() { //1
-//		return getNoticeList(1); // 2를 거쳐 3을 호출하므로 두번의 스택이 만들어지기 때문에 주석
-		return getNoticeList("title", "", 1); // 3을 바로 호출
+	
+	/* 공지 일괄삭제 */
+	public int removeNoticeAll(int[] ids) { // 배열로 id를 넘겨받아 삭제된 갯수 리턴
+		return 0;
 	}
 	
-	public List<NoticeView> getNoticeList(int page) { // 2
+	/* 공지 일괄공개 */
+	public int pubNoticeAll(int[] ids) { // 배열로 id를 넘겨받아 공개된 갯수 리턴
+		return 0;
+	}
+	
+	/* 공지 등록 */
+	public int insertNotice(Notice notice) {
+		return 0;
+	}
+	
+	/* 공지 삭제 */
+	public int deleteNotice(int id) {
+		return 0;
+	}
+	
+	/* 공지 수정 */
+	public int updateNotice(Notice notice) { // insert, update, delete는 보통 레코드 몇 개에 영향을 주었는가에 중점을 두어 반환
+		return 0;
+	}
+	
+	/* 최신 공지 불러오기 */
+	public List<Notice> getNoticeNewestList() { // 댓글 수까지 필요 없으므로 NoticeView가 아닌 Notice
+		return null;
+	}
+
+	public List<NoticeView> getNoticeList() { 
+		return getNoticeList("title", "", 1);
+	}
+	
+	public List<NoticeView> getNoticeList(int page) {
 		return getNoticeList("title", "", 1); 
 	}
 	
@@ -36,8 +65,6 @@ public class NoticeService {
 				+ "            (SELECT * FROM NOTICE_VIEW where " + field + " like ? ORDER BY REGDATE DESC) N"
 				+ "       )"
 				+ "    WHERE NUM BETWEEN ? AND ?";
-		// 1, 11, 21, 31 -> 1 + (page - 1) * 10
-		// 10, 20, 30, 40 -> page * 10
 		
 		String url = "jdbc:oracle:thin:@localhost:1521/xe";
 		
@@ -48,9 +75,6 @@ public class NoticeService {
 			st.setString(1, "%" + query + "%");
 			st.setInt(2, 1 + (page - 1) * 10);
 			st.setInt(3, page * 10);
-			// st.setString(0, "title" || "write_id");
-			// title 혹은 write_id 컬럼을 ?로 처리할 경우 ''가 생기기 때문에 불가능
-			// SELECT * FROM NOTICE where 'title' = ?
 			
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
