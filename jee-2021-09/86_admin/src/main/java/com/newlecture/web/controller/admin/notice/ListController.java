@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.newlecture.web.entity.NoticeView;
 import com.newlecture.web.service.NoticeService;
 
-@WebServlet("/admin/notice/list")
+@WebServlet("/admin/board/notice/list")
 public class ListController extends HttpServlet{
 	// 404 : url이 없어 발생하는 오류(url 오류)
 	// 405 : url은 있는데 그 안에 받을 수 있는 메서드가 없는 경우(메서드 오류)
@@ -27,14 +27,33 @@ public class ListController extends HttpServlet{
 //		for(String delId : delIds) System.out.printf("del ID : %s\n", delId);
 		
 		String cmd = request.getParameter("cmd");
+//		switch(cmd) {
+//		case "all-open": 
+//			for(String openId : openIds) System.out.printf("open ID : %s\n", openId);
+//			break;
+//		case "all-del":
+//			for(String delId : delIds) System.out.printf("del ID : %s\n", delId);
+//			break;
+//		}
 		switch(cmd) {
 		case "all-open": 
 			for(String openId : openIds) System.out.printf("open ID : %s\n", openId);
 			break;
 		case "all-del":
-			for(String delId : delIds) System.out.printf("del ID : %s\n", delId);
+			NoticeService service = new NoticeService();
+			int[] ids = new int[delIds.length];
+			for(int i = 0; i < delIds.length; i++) {
+				ids[i] = Integer.parseInt(delIds[i]);
+			}
+			int result = service.removeNoticeAll(ids);
 			break;
 		}
+		
+		// 일괄 공개/삭제 후 수정된 목록을 보여줌
+		// url을 같이 쓰고 있지만, post에서 get요청을 다시 호출할 수 있음 -> redirect
+		// 목록 재요청
+		response.sendRedirect("list"); // 서버에서 list 페이지를 get 요청
+		// 처리 로직인 끝난 후 -> 그 결과를 보여주는 다른 페이지로 이동
 	}
 	
 	@Override

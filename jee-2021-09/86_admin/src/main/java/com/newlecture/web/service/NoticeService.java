@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,31 @@ public class NoticeService {
 	
 	/* 공지 일괄삭제 */
 	public int removeNoticeAll(int[] ids) { // 배열로 id를 넘겨받아 삭제된 갯수 리턴
-		return 0;
+		int result = 0;
+		String params = "";
+		
+		for(int i = 0; i<ids.length; i++) {
+			params += ids[i];
+			if (i < ids.length - 1) params += ","; 
+		}
+		
+		String sql = "DELETE NOTICE WHERE ID IN (" + params + ")";
+
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			Statement st = con.createStatement();			
+			result = st.executeUpdate(sql); // update 된 레코드 수 반환
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	/* 공지 일괄공개 */
