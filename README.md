@@ -35,8 +35,6 @@ SELECT * FROM COMMENT2;
 - 86_admin : notice 테이블에 대한 pub 컬럼 추가
 
 ![ex_screenshot](images/notice-pub.PNG)
-
-- notice_view 테이블에 대한 pub 컬럼 추가
 ```sql
 CREATE VIEW NOTICE_VIEW
 AS
