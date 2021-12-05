@@ -72,6 +72,8 @@ public class RegController extends HttpServlet {
 		byte[] buf = new byte[1024];
 		int size = 0;
 		while((size = fis.read(buf)) != -1) { // 만약 파일 용량이 300이면, 300이 size에 담기고, 더 이상 읽을 게 없으면 -1을 리턴
+			System.out.println("----------" + fis.read(buf));
+			System.out.println("----------size : " + size);
 //			fos.write(buf); // 1024 만큼의 버퍼를 퍼와서 다 씀
 			fos.write(buf, 0, size); // 맨 마지막 turn을 지날 때 1024와 딱 떨어지지 않고 더 적을 것이기 때문에, 읽어온 것 만큼(size)만 쓰도록 하기
 			// 0에서부터 size 개수만큼 1024 용량의 바가지를 사용해서 담아 옴.
