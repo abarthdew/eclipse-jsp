@@ -149,7 +149,7 @@
                 </div>
 
                 <!--  <form method="post" enctype="multipart/form-data"> -->
-                <form method="post" action="reg">
+                <form method="post" action="reg" enctype="multipart/form-data">
                     <div class="margin-top first">
                         <h3 class="hidden">공지사항 입력</h3>
                         <table class="table">
