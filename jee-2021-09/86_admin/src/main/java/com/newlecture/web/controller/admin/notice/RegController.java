@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.newlecture.web.entity.Notice;
+import com.newlecture.web.service.NoticeService;
 
 @WebServlet("/admin/board/notice/reg")
 // get, post 요청 처리
@@ -25,16 +26,25 @@ public class RegController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String open = request.getParameter("open");
+		String isOpen = request.getParameter("open");
+		boolean pub = isOpen != null ? true : false;
+		
+//		PrintWriter out = response.getWriter();
+//		out.printf("tltle: %s<br>", title);
+//		out.printf("content: %s<br>", content);
+//		out.printf("open: %s<br>", isOpen);
 		
 		Notice notice = new Notice();
+		notice.setId((int)Math.random()*100+1);
 		notice.setTitle(title);
 		notice.setContent(content);
+		notice.setPub(pub);
+		notice.setWriter("newlec");
 		
-		PrintWriter out = response.getWriter();
-		out.printf("tltle: %s<br>", title);
-		out.printf("content: %s<br>", content);
-		out.printf("open: %s<br>", open);
+		NoticeService service = new NoticeService();
+		service.insertNotice(notice);
+		
+		response.sendRedirect("list");
 	}
 	
 }

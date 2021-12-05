@@ -51,7 +51,32 @@ public class NoticeService {
 	
 	/* 공지 등록 */
 	public int insertNotice(Notice notice) {
-		return 0;
+		int result = 0;
+		
+		String sql = "INSERT INTO NOTICE (ID, TITLE, CONTENT, WRITE_ID, REGDATE, PUB) VALUES (?, ?, ?, ?, SYSDATE, ?)";
+		String url = "jdbc:oracle:thin:@localhost:1521/xe";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+//			Statement st = con.createStatement();
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, notice.getId());
+			st.setString(2, notice.getTitle());
+			st.setString(3, notice.getContent());
+			st.setString(4, notice.getWriter());
+			st.setBoolean(5, notice.getPub());
+			
+//			result = st.executeUpdate(sql); // update 된 레코드 수 반환
+			result = st.executeUpdate();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	/* 공지 삭제 */
