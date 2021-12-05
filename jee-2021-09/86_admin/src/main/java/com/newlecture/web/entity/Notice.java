@@ -10,10 +10,11 @@ public class Notice {
 	private Date regdate;
 	private String files;
 	private String content;
+	private boolean pub;
 	
 	public Notice() {
 	}
-	public Notice(int id, String title, String writer, int hit, Date regdate, String files, String content) {
+	public Notice(int id, String title, String writer, int hit, Date regdate, String files, String content, boolean pub) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -22,6 +23,7 @@ public class Notice {
 		this.regdate = regdate;
 		this.files = files;
 		this.content = content;
+		this.pub = pub;
 	}
 	public int getId() {
 		return id;
@@ -64,6 +66,12 @@ public class Notice {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public boolean getPub() {
+		return pub;
+	}
+	public void setPub(boolean pub) {
+		this.pub = pub;
 	}
 	
 }

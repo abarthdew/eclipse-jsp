@@ -111,7 +111,8 @@ public class NoticeService {
 					rs.getDate("REGDATE"),
 					rs.getString("FILES"),
 					"", // rs.getString("CONTENT"), VIEW에서 가져오지 않기 때문에 빼 줌
-					rs.getInt("CNT")
+					rs.getInt("CNT"),
+					rs.getBoolean("PUB")
 				);
 				list.add(notice);
 			}
@@ -184,7 +185,8 @@ public class NoticeService {
 					rs.getInt("HIT"),
 					rs.getDate("REGDATE"),
 					rs.getString("FILES"),
-					rs.getString("CONTENT")
+					rs.getString("CONTENT"),
+					rs.getBoolean("PUB")
 				);
 			}
 			
@@ -225,7 +227,8 @@ public class NoticeService {
 					rs.getInt("HIT"),
 					rs.getDate("REGDATE"),
 					rs.getString("FILES"),
-					rs.getString("CONTENT")
+					rs.getString("CONTENT"),
+					rs.getBoolean("PUB")
 				);
 			}
 			
@@ -263,7 +266,8 @@ public class NoticeService {
 					rs.getInt("HIT"),
 					rs.getDate("REGDATE"),
 					rs.getString("FILES"),
-					rs.getString("CONTENT")
+					rs.getString("CONTENT"),
+					rs.getBoolean("PUB")
 				);
 			}
 			
