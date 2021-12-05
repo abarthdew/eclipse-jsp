@@ -32,9 +32,18 @@ INSERT INTO COMMENT2 VALUES (1, '내용1', SYSDATE, '사용자1', 1);
 SELECT * FROM COMMENT2;
 
 ```
-- 86_admin : notice 테이블에 대한 컬럼 추가(글 공개 여부)
+- 86_admin : notice 테이블에 대한 pub 컬럼 추가
 
 ![ex_screenshot](images/notice-pub.PNG)
+
+- notice_view 테이블에 대한 pub 컬럼 추가
+```sql
+CREATE VIEW NOTICE_VIEW
+AS
+SELECT COUNT(C.ID) CNT, N.* FROM NOTICE N LEFT JOIN COMMENT2 C
+    on N.ID = C.NOTICE_ID
+    GROUP BY N.ID, N.TITLE, N.WRITE_ID, N.CONTENT, N.REGDATE, N.HIT, N.FILES, N.PUB;
+```
 
 # Reference
 - https://www.youtube.com/watch?v=qfGbsEdMaV4&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=5
