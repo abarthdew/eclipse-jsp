@@ -5,6 +5,7 @@ categories: [Back, JSP]
 tags: [Back, JSP]
 ---
 
+# [JSP for Eclipse - List](https://github.com/abarthdew/eclipse-jsp)
 ## 핵심정리
 
 > 💡 서버상 저장소   
