@@ -1,15 +1,21 @@
+---
+title: JSP for Eclipse - List
+date: 2022-09-01
+categories: [Back, JSP]
+tags: [Back, JSP]
+---
+
 ## 핵심정리
 
-> 💡 **<서버상 저장소>**
-> `page context` : 페이지 내에서 혼자 사용할 수 있는 저장소.
-> `request` : 둘 사이의 포워드 관계에서 사용할 수 있는 저장소.
-> `session` : 현재 세션에서 공유되는 저장소.
-> `page` : 모든 세션, 모든 페이지에서 공유되는 저장소.
-> **<클라이언트상 저장소>**
-> `cookie` : 클라이언트에 저장하는 저장소.
+> 💡 서버상 저장소   
+> - `page context` : 페이지 내에서 혼자 사용할 수 있는 저장소.
+> - `request` : 둘 사이의 포워드 관계에서 사용할 수 있는 저장소.
+> - `session` : 현재 세션에서 공유되는 저장소.
+> - `page` : 모든 세션, 모든 페이지에서 공유되는 저장소.
+> 클라이언트상 저장소
+> - `cookie` : 클라이언트에 저장하는 저장소.
 
-> 📌 **<그 외>**
-> 
+> 📌 그 외   
 > - 404 : url이 없어 발생하는 오류(url 오류)
 > - 405 : url은 있는데 그 안에 받을 수 있는 메서드가 없는 경우> (메서드 오류)
 > - 403 : url, 메서드는 있는데 권한이 없는 경우(보안 오류)
@@ -36,6 +42,7 @@
 
 ## 데이터베이스 정보
 - 50_project
+
 ```sql
 CREATE USER NEWLEC IDENTIFIED BY 1234;
 GRANT CONNECT, RESOURCE, DBA TO NEWLEC;
@@ -52,7 +59,9 @@ CREATE TABLE NOTICE (
 INSERT INTO NOTICE VALUES (6, 'TITLE', 'WRITE_ID', 'CONTENT', SYSDATE, 6, 'FILES');
 SELECT * FROM NOTICE;
 ```
+
 - 82_notice_view
+
 ```sql
 CREATE TABLE COMMENT2 (
     ID NUMBER,
@@ -63,11 +72,12 @@ CREATE TABLE COMMENT2 (
 );
 INSERT INTO COMMENT2 VALUES (1, '내용1', SYSDATE, '사용자1', 1);
 SELECT * FROM COMMENT2;
-
 ```
+
 - 86_admin : notice 테이블에 대한 pub 컬럼 추가
 
 ![ex_screenshot](https://raw.githubusercontent.com/abarthdew/eclipse-jsp/main/images/notice-pub.PNG)
+
 ```sql
 CREATE VIEW NOTICE_VIEW
 AS
